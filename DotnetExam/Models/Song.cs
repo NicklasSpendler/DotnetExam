@@ -1,11 +1,16 @@
-﻿namespace DotnetExam.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DotnetExam.Models
 {
     public class Song
     {
         public int Id { get; set; }
 
-        public String Name { get; set; }
+        [Required]
+        public String ?Name { get; set; }
 
-        public Artist artist { get; set; }
+        public Artist ?artist { get; set; }
+
+        public Album ?album { get; set; }
     }
 }

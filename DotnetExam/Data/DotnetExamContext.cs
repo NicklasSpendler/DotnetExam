@@ -16,5 +16,9 @@ namespace DotnetExam.Data
         }
 
         public DbSet<DotnetExam.Models.Artist> Artist { get; set; }
+
+        public DbSet<DotnetExam.Models.Album> Album { get; set; }
+
+        public DbSet<DotnetExam.Models.Song> Song { get; set; }
     }
 }
