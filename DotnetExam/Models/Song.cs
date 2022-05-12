@@ -7,7 +7,7 @@ namespace DotnetExam.Models
         public int Id { get; set; }
 
         [Required]
-        public String ?Name { get; set; }
+        public String Name { get; set; }
 
         public Artist ?artist { get; set; }
 

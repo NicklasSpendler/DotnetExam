@@ -6,9 +6,8 @@ namespace DotnetExam.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        public String ?Name { get; set; }
+        [Required]        public String Name { get; set; }
 
-        //public List<Song> Songs { get; set; }
+        public List<Song> ?Songs { get; set; }
     }
 }

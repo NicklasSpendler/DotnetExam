@@ -7,8 +7,8 @@ namespace DotnetExam.Models
         public int Id { get; set; }
         
         [Required]
-        public string ?Name { get; set; }
+        public string Name { get; set; }
 
-        //List<Song> Songs { get; set; }
+        public List<Song> ?Songs { get; set; }
     }
 }
