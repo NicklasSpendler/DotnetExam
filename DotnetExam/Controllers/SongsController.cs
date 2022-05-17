@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,13 +22,15 @@ namespace DotnetExam.Controllers
         // GET: Songs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Song.ToListAsync());
+              return _context.Song != null ? 
+                          View(await _context.Song.ToListAsync()) :
+                          Problem("Entity set 'DotnetExamContext.Song'  is null.");
         }
 
         // GET: Songs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Song == null)
             {
                 return NotFound();
             }
@@ -69,12 +70,13 @@ namespace DotnetExam.Controllers
         // GET: Songs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Song == null)
             {
                 return NotFound();
             }
 
             var song = await _context.Song.FindAsync(id);
+
             if (song == null)
             {
                 return NotFound();
@@ -120,7 +122,7 @@ namespace DotnetExam.Controllers
         // GET: Songs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Song == null)
             {
                 return NotFound();
             }
@@ -140,15 +142,23 @@ namespace DotnetExam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Song == null)
+            {
+                return Problem("Entity set 'DotnetExamContext.Song'  is null.");
+            }
             var song = await _context.Song.FindAsync(id);
-            _context.Song.Remove(song);
+            if (song != null)
+            {
+                _context.Song.Remove(song);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SongExists(int id)
         {
-            return _context.Song.Any(e => e.Id == id);
+          return (_context.Song?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
