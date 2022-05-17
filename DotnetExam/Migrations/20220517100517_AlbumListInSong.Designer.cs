@@ -4,6 +4,7 @@ using DotnetExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    partial class DotnetExamContextModelSnapshot : ModelSnapshot
+    [Migration("20220517100517_AlbumListInSong")]
+    partial class AlbumListInSong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,14 +47,16 @@ namespace DotnetExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SongId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
 
                     b.ToTable("Album");
                 });
@@ -111,6 +115,13 @@ namespace DotnetExam.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DotnetExam.Models.Album", b =>
+                {
+                    b.HasOne("DotnetExam.Models.Album", null)
+                        .WithMany("Albums")
+                        .HasForeignKey("AlbumId");
+                });
+
             modelBuilder.Entity("DotnetExam.Models.Song", b =>
                 {
                     b.HasOne("DotnetExam.Models.Artist", "artist")
@@ -118,6 +129,11 @@ namespace DotnetExam.Migrations
                         .HasForeignKey("artistId");
 
                     b.Navigation("artist");
+                });
+
+            modelBuilder.Entity("DotnetExam.Models.Album", b =>
+                {
+                    b.Navigation("Albums");
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Artist", b =>

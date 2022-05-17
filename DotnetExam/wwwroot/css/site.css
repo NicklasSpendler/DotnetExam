@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+ul{
+    padding: 0;
+}
+
+li{
+    list-style: none;
+}

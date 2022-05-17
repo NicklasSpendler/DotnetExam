@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotnetExam.Models
 {
@@ -11,6 +12,10 @@ namespace DotnetExam.Models
 
         public Artist ?artist { get; set; }
 
-        public Album ?album { get; set; }
+        [JsonIgnore]
+        public List<Album> ?albums { get; set; }
+
+        
+        
     }
 }

@@ -74,13 +74,21 @@ namespace DotnetExam.Controllers
                 return NotFound();
             }
 
-            var album = await _context.Album.FindAsync(id);
+            //var album = await _context.Album.Where(a => a.Id == id).ToListAsync();
+
+            var album = await _context.Album.Include(s => s.Songs).FirstAsync(a => a.Id == id);
+
+
+            ViewData["Songs"] = new SelectList(_context.Song, "Id", "Name");
+
             if (album == null)
             {
                 return NotFound();
             }
             return View(album);
         }
+
+
 
         // POST: Albums/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -114,7 +122,29 @@ namespace DotnetExam.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+
+            Console.WriteLine("Test");
             return View(album);
+        }
+
+        //Albums/Edit/songId/5
+        [HttpPost]
+        public async Task<Album> addSong(int id, [Bind("name,songs,SongId")] Album album)
+        {
+
+            Console.Write("Hello World");
+
+            var selectedAlbum = await _context.Album.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
+
+            var selectedSong = await _context.Song.FindAsync(album.SongId);
+
+            selectedAlbum.Songs.Add(selectedSong);
+
+            await _context.SaveChangesAsync();
+
+
+            return selectedAlbum;
         }
 
         // GET: Albums/Delete/5

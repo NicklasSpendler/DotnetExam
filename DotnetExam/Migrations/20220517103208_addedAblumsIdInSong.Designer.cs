@@ -4,6 +4,7 @@ using DotnetExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    partial class DotnetExamContextModelSnapshot : ModelSnapshot
+    [Migration("20220517103208_addedAblumsIdInSong")]
+    partial class addedAblumsIdInSong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +51,6 @@ namespace DotnetExam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SongId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Album");
@@ -85,6 +84,9 @@ namespace DotnetExam.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("albumsId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("artistId")
                         .HasColumnType("int");
