@@ -9,7 +9,7 @@ var connectionString = builder.Configuration.GetConnectionString("Jespers connec
 builder.Services.AddDbContext<DotnetExamContext>(options =>
     options.UseSqlServer(connectionString));;
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<DotnetExamContext>();;
 
 builder.Services.AddDbContext<DotnetExamContext>(options =>
@@ -19,6 +19,7 @@ builder.Services.AddDbContext<DotnetExamContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
