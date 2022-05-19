@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DotnetExam.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DotnetExam.Data
 {
-    public class DotnetExamContext : DbContext
+    public class DotnetExamContext : IdentityDbContext
     {
         public DotnetExamContext (DbContextOptions<DotnetExamContext> options)
             : base(options)
