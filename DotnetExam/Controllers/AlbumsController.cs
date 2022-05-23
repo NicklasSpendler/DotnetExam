@@ -130,6 +130,7 @@ namespace DotnetExam.Controllers
 
         //Albums/Edit/songId/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<Album> addSong(int id, [Bind("name,songs,SongId")] Album album)
         {
 
