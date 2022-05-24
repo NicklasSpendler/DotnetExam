@@ -4,7 +4,7 @@ using DotnetExam.Data;
 using DotnetExam.Models;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("Jespers connection") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DotnetExamContext") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
 
 builder.Services.AddDbContext<DotnetExamContext>(options =>
     options.UseSqlServer(connectionString));;
@@ -12,9 +12,9 @@ builder.Services.AddDbContext<DotnetExamContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<DotnetExamContext>();;
 
-builder.Services.AddDbContext<DotnetExamContext>(options =>
+/*builder.Services.AddDbContext<DotnetExamContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Jespers connection") ?? throw new InvalidOperationException("Connection string 'DotnetExamContext' not found.")));
-
+*/
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -25,7 +25,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    SeedData.Initialize(services);
+    //SeedData.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
