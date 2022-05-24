@@ -85,7 +85,7 @@ namespace DotnetExam.Controllers
             {
                 return NotFound();
             }
-            return View(album);
+            return View(new AlbumAddSongDTO() { Album = album });
         }
 
 
@@ -130,11 +130,9 @@ namespace DotnetExam.Controllers
 
         //Albums/Edit/songId/5
         [HttpPost]
-        public async Task<Album> addSong(int id, [Bind("name,songs,SongId")] Album album)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> addSong(int id, [Bind("SongId")] AlbumAddSongDTO album)
         {
-
-            Console.Write("Hello World");
-
             var selectedAlbum = await _context.Album.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
 
             var selectedSong = await _context.Song.FindAsync(album.SongId);
@@ -144,7 +142,7 @@ namespace DotnetExam.Controllers
             await _context.SaveChangesAsync();
 
 
-            return selectedAlbum;
+            return RedirectToAction("Index");
         }
 
         // GET: Albums/Delete/5

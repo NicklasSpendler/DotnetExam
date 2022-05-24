@@ -11,7 +11,6 @@ namespace DotnetExam.Models
 
         [JsonIgnore]
         public List<Song> ?Songs { get; set; }
-        public int ?SongId { get; set; }
 
     }
 
