@@ -73,8 +73,11 @@ namespace DotnetExam.Controllers
             {
                 return NotFound();
             }
+            //Variable artist der indeholder = fra context - fra artist -
 
-            var artist = await _context.Artist.FindAsync(id);
+            var artist = await _context.Artist.
+                Include(s => s.Songs).
+                FirstAsync(a => a.Id == id);
             if (artist == null)
             {
                 return NotFound();
