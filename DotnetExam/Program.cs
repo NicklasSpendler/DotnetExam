@@ -4,7 +4,7 @@ using DotnetExam.Data;
 using DotnetExam.Models;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("Jespers connection") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DotnetExamContext") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
 
 builder.Services.AddDbContext<DotnetExamContext>(options =>
     options.UseSqlServer(connectionString));;

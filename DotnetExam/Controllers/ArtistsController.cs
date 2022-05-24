@@ -79,7 +79,9 @@ namespace DotnetExam.Controllers
                 Include(s => s.Songs).
                 FirstAsync(a => a.Id == id);
 
-            ViewData["Songs"] = new SelectList(_context.Song, "id", "Name");
+            //ViewData["Songs"] = new SelectList(_context.Song, "id", "Name");
+
+            ViewData["Songs"] = _context.Song.ToList();
 
             if (artist == null)
             {
@@ -125,6 +127,23 @@ namespace DotnetExam.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(artist);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> addSong(int id, [Bind("SongId")] ArtistAddSongDTO artist)
+        {
+            var tempid = id;
+
+            var selectedArtist = await _context.Artist.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
+
+            var selectedSong = await _context.Song.FindAsync(artist.SongId);
+
+            selectedArtist.Songs.Add(selectedSong);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Artists/Delete/5
