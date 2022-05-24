@@ -35,13 +35,13 @@ namespace DotnetExam.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song
+            var song = await _context.Song.Include(s => s.comments)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (song == null)
             {
                 return NotFound();
             }
-
+           
             return View(song);
         }
 
