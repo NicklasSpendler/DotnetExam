@@ -78,11 +78,16 @@ namespace DotnetExam.Controllers
             var artist = await _context.Artist.
                 Include(s => s.Songs).
                 FirstAsync(a => a.Id == id);
+
+            ViewData["Songs"] = new SelectList(_context.Song, "id", "Name");
+
             if (artist == null)
             {
                 return NotFound();
             }
-            return View(artist);
+
+
+            return View(new ArtistAddSongDTO() { Artist = artist });
         }
 
         // POST: Artists/Edit/5

@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Artist.Id" />
             <div class="form-group">
                 <label asp-for="Artist.Name" class="control-label"></label>
                 <input asp-for="Artist.Name" class="form-control" />
@@ -22,8 +22,12 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+</div>
 
+<div class="songList">
     <form asp-action="addSong">
+        
         <input type="hidden" name="Id" value="@Model.Artist.Id" />
         <div class="form-group">
             <label asp-for="SongId" class="control-label">Add Song</label>
