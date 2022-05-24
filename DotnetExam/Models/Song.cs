@@ -15,7 +15,7 @@ namespace DotnetExam.Models
         [JsonIgnore]
         public List<Album> ?albums { get; set; }
 
-        
+        public List<Comment>? comments { get; set; }
         
     }
 }

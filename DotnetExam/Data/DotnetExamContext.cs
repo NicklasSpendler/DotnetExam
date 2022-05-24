@@ -21,5 +21,7 @@ namespace DotnetExam.Data
         public DbSet<DotnetExam.Models.Album> Album { get; set; }
 
         public DbSet<DotnetExam.Models.Song> Song { get; set; }
+
+        public DbSet<DotnetExam.Models.Comment>? Comment { get; set; }
     }
 }
