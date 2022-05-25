@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<DotnetExam.Models.Song>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -13,9 +14,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Name)                
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.artist)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +29,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.artist.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.artist.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
