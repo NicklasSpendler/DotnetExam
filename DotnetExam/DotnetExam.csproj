@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\Class.cs" />
+    <Compile Remove="Models\SongArtistViewDTO.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -89,7 +89,7 @@ namespace DotnetExam.Controllers
             }
 
 
-            return View(new ArtistAddSongDTO() { Artist = artist });
+            return View(new ArtistSongDTO() { Artist = artist });
         }
 
         // POST: Artists/Edit/5
@@ -131,10 +131,8 @@ namespace DotnetExam.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> addSong(int id, [Bind("SongId")] ArtistAddSongDTO artist)
+        public async Task<IActionResult> addSong(int id, [Bind("SongId")] ArtistSongDTO artist)
         {
-            var tempid = id;
-
             var selectedArtist = await _context.Artist.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
 
             var selectedSong = await _context.Song.FindAsync(artist.SongId);
@@ -144,6 +142,20 @@ namespace DotnetExam.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveSong(int id, [Bind("SongId")] ArtistSongDTO artist) 
+        {
+            var selectedArtist = await _context.Artist.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
+
+            var selectedSong = await _context.Song.FindAsync(artist.SongId);
+
+            selectedArtist.Songs.Remove(selectedSong);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Edit", id);
         }
 
         // GET: Artists/Delete/5
