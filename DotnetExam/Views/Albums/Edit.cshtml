@@ -38,17 +38,17 @@
             <input type="submit" value="Add" class="btn btn-primary" />
         </div>
     </form>
-    <ul>
+    <ul class="album__song__removeList">
     @foreach (var song in Model.Album.Songs)
     {
-        
-        <form asp-action="RemoveSong"> 
-            <input type="hidden" name="Id" value="@Model.Album.Id" />
-            <input type="hidden" name="SongId" value="@song.Id" />
-            <input type="submit" value="Delete" class="btn btn-primary"/>
-        </form>
-        <li data-id="@song.Id">@song.Name</li>
-        
+        <div class="album__song__remove">
+            <form asp-action="RemoveSong" class="album__song__removeBtn"> 
+                <input type="hidden" name="Id" value="@Model.Album.Id" />
+                <input type="hidden" name="SongId" value="@song.Id" />
+                <input type="submit" value="Delete" class="btn btn-primary"/>
+            </form>
+            <li data-id="@song.Id">@song.Name</li>
+        </div>
     }
     </ul>
 

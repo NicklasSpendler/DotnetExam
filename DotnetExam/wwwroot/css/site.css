@@ -24,3 +24,17 @@ ul{
 li{
     list-style: none;
 }
+
+.album__song__removeList{
+    margin: 1rem 0;
+}
+
+.album__song__removeBtn{
+    margin-right: 1rem;
+}
+
+.album__song__remove {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
