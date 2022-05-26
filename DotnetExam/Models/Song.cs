@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace DotnetExam.Models
@@ -9,7 +10,7 @@ namespace DotnetExam.Models
 
         [Required]
         public String Name { get; set; }
-
+        [DisplayName("Artist")]
         public Artist ?artist { get; set; }
 
         [JsonIgnore]

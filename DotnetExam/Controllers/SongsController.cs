@@ -22,9 +22,12 @@ namespace DotnetExam.Controllers
         // GET: Songs
         public async Task<IActionResult> Index()
         {
-              return _context.Song != null ? 
-                          View(await _context.Song.ToListAsync()) :
-                          Problem("Entity set 'DotnetExamContext.Song'  is null.");
+            var dotnetExamContext = _context.Song.Include(a => a.artist);
+            return View(await dotnetExamContext.ToListAsync());
+
+            //return _context.Song != null ? 
+            //            View(await _context.Song.ToListAsync()) :
+            //            Problem("Entity set 'DotnetExamContext.Song'  is null.");
         }
 
         // GET: Songs/Details/5
