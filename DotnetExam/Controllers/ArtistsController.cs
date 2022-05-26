@@ -144,19 +144,6 @@ namespace DotnetExam.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RemoveSong(int id, [Bind("SongId")] ArtistSongDTO artist) 
-        {
-            var selectedArtist = await _context.Artist.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
-
-            var selectedSong = await _context.Song.FindAsync(artist.SongId);
-
-            selectedArtist.Songs.Remove(selectedSong);
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Edit", id);
-        }
 
         // GET: Artists/Delete/5
         public async Task<IActionResult> Delete(int? id)

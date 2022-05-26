@@ -85,7 +85,7 @@ namespace DotnetExam.Controllers
             {
                 return NotFound();
             }
-            return View(new AlbumAddSongDTO() { Album = album });
+            return View(new AlbumSongDTO() { Album = album });
         }
 
 
@@ -104,6 +104,8 @@ namespace DotnetExam.Controllers
 
             if (ModelState.IsValid)
             {
+                _context.Update(album);
+                await _context.SaveChangesAsync();
                 try
                 {
                     _context.Update(album);
@@ -120,18 +122,17 @@ namespace DotnetExam.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+            return RedirectToAction("Edit", new { @id = id });
 
-
-            Console.WriteLine("Test");
-            return View(album);
         }
 
-        //Albums/Edit/songId/5
+        //////////////////////////////
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> addSong(int id, [Bind("SongId")] AlbumAddSongDTO album)
+        public async Task<IActionResult> addSong(int id, [Bind("SongId")] AlbumSongDTO album)
         {
             var selectedAlbum = await _context.Album.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
 
@@ -142,7 +143,24 @@ namespace DotnetExam.Controllers
             await _context.SaveChangesAsync();
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new { @id = id });
+        }
+
+        //////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> RemoveSong(int id, [Bind("SongId")] AlbumSongDTO album)
+        {
+            var selectedAlbum = await _context.Album.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
+
+            var selectedSong = await _context.Song.FindAsync(album.SongId);
+
+            selectedAlbum.Songs.Remove(selectedSong);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Edit", new { @id = id });
+
+            //"Edit","controller", new {@id=id}
         }
 
         // GET: Albums/Delete/5

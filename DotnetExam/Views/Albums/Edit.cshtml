@@ -1,4 +1,4 @@
-﻿@model DotnetExam.Models.AlbumAddSongDTO
+﻿@model DotnetExam.Models.AlbumSongDTO
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" name="Id" value="@Model.Album.Id" />
+            <input type="hidden" asp-for="Album.Id" value="@Model.Album.Id" />
             <div class="form-group">
                 <label asp-for="Album.Name" class="control-label"></label>
                 <input asp-for="Album.Name" class="form-control" />
@@ -41,9 +41,11 @@
     <ul>
     @foreach (var song in Model.Album.Songs)
     {
-        <form asp-action="RemoveSong" method="post"> 
+        
+        <form asp-action="RemoveSong"> 
+            <input type="hidden" name="Id" value="@Model.Album.Id" />
             <input type="hidden" name="SongId" value="@song.Id" />
-            <input type="submit" value="Delete" class="btn btn-primary "/>
+            <input type="submit" value="Delete" class="btn btn-primary"/>
         </form>
         <li data-id="@song.Id">@song.Name</li>
         
