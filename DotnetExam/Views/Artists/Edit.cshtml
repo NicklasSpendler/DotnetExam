@@ -29,7 +29,7 @@
     <h2>Song List</h2>
     <hr />
     <form asp-action="addSong">
-    <input type="hidden" name="Id" value="@Model.Artist.Id "/>
+    <input type="hidden" name="Id" value="@Model.Artist.Id"/>
     <select id="SongId" class="form-control" name="SongId">
     @foreach (var song in ViewBag.Songs)
     {
@@ -40,6 +40,7 @@
         <input type="submit" value="Add" class="btn btn-primary" />
     </div>
     </form>
+
     <ul>
     @foreach (var song in Model.Artist.Songs)
     {

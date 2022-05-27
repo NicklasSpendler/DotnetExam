@@ -1,7 +1,7 @@
-﻿@model DotnetExam.Models.Song
+﻿@model DotnetExam.Models.SongArtistDTO
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Song";
 }
 
 <h1>Edit</h1>
@@ -14,15 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Song.Name" class="control-label"></label>
+                <input asp-for="Song.Name" class="form-control" />
+                <span asp-validation-for="Song.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
+
+<div class="artistList">
+    <h2>Artist</h2>
+    <hr />
+    <form asp-action="SetArtistOnSong">
+    <input type="hidden" name="id" value="@Model.Song.Id"/>
+@*    <select id="ArtistId" class="form-control" name="ArtistId">
+        @foreach (var artist in ViewBag.Artists)
+        {
+            <option value="@artist.Id">@artist.Name</option>
+        }
+    </select>*@
+    <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
+    <div class="form-group">
+        <input type="submit" value="Add" class="btn-primary"/>
+    </div>
+    </form>
+
 </div>
 
 <div>

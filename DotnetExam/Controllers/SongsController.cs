@@ -78,7 +78,9 @@ namespace DotnetExam.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song.FindAsync(id);
+            var song = await _context.Song.Where(s => s.Id == id).Include(a => a.artist).FirstOrDefaultAsync();
+
+            ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
 
             if (song == null)
             {
@@ -121,6 +123,23 @@ namespace DotnetExam.Controllers
             }
             return View(song);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetArtistOnSong(int id, [Bind("SongId")] Song song) 
+        {
+            var selectedSong = await _context.Song.Where(s => s.Id == id).Include(a => a.artist).FirstOrDefaultAsync();
+
+            var selectedArtist = await _context.Artist.FindAsync(song.Id);
+
+            selectedSong.artist = selectedArtist;
+
+            await _context.SaveChangesAsync();
+            
+
+            return RedirectToAction("index");
+        }
+
 
         // GET: Songs/Delete/5
         public async Task<IActionResult> Delete(int? id)
