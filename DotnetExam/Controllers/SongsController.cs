@@ -80,13 +80,26 @@ namespace DotnetExam.Controllers
 
             var song = await _context.Song.Where(s => s.Id == id).Include(a => a.artist).FirstOrDefaultAsync();
 
-            ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
+
+            
+            
+            if(song.artist == null)
+            {
+                ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
+            }
+            else
+            {
+                ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
+            }
+            
+
+
 
             if (song == null)
             {
                 return NotFound();
             }
-            return View(song);
+            return View(new SongArtistDTO { Song = song});
         }
 
         // POST: Songs/Edit/5
@@ -126,18 +139,18 @@ namespace DotnetExam.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetArtistOnSong(int id, [Bind("SongId")] Song song) 
+        public async Task<IActionResult> SetArtistOnSong(int id, [Bind("ArtistId")] SongArtistDTO songDTO) 
         {
             var selectedSong = await _context.Song.Where(s => s.Id == id).Include(a => a.artist).FirstOrDefaultAsync();
 
-            var selectedArtist = await _context.Artist.FindAsync(song.Id);
+            var selectedArtist = await _context.Artist.FindAsync(songDTO.ArtistId);
 
             selectedSong.artist = selectedArtist;
 
             await _context.SaveChangesAsync();
             
 
-            return RedirectToAction("index");
+            return RedirectToAction("Edit", new { @Id = id });
         }
 
 

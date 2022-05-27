@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Song.Id" />
             <div class="form-group">
                 <label asp-for="Song.Name" class="control-label"></label>
                 <input asp-for="Song.Name" class="form-control" />
@@ -29,17 +29,14 @@
     <h2>Artist</h2>
     <hr />
     <form asp-action="SetArtistOnSong">
-    <input type="hidden" name="id" value="@Model.Song.Id"/>
-@*    <select id="ArtistId" class="form-control" name="ArtistId">
-        @foreach (var artist in ViewBag.Artists)
-        {
-            <option value="@artist.Id">@artist.Name</option>
-        }
-    </select>*@
-    <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
-    <div class="form-group">
-        <input type="submit" value="Add" class="btn-primary"/>
-    </div>
+        <input type="hidden" name="id" value="@Model.Song.Id"/>
+        <div class="form-group">
+            <label asp-for="ArtistId" class="control-label">Set Artist</label>
+            <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Set Artist" class="btn-primary"/>
+        </div>
     </form>
 
 </div>
