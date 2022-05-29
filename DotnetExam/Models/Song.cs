@@ -9,12 +9,13 @@ namespace DotnetExam.Models
         public int Id { get; set; }
 
         [Required]
-        public String Name { get; set; }
+        public string Name { get; set; }
         [DisplayName("Artist")]
-        public Artist ?artist { get; set; }
+        public Artist? artist { get; set; }
+        public int ArtistId { get; set; }
 
         [JsonIgnore]
-        public List<Album> ?albums { get; set; }
+        public List<Album>? albums { get; set; }
 
         public List<Comment>? comments { get; set; }
         

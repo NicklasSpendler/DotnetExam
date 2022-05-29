@@ -49,8 +49,15 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Songs/Create
+        [HttpGet]
         public IActionResult Create()
         {
+
+                ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
+ 
+                //ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
+        
+
             return View();
         }
 
@@ -59,15 +66,25 @@ namespace DotnetExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Song song)
+        public async Task<IActionResult> Create([Bind("Id,Name,ArtistId")] Song song)
         {
+
+            //if (song.artist == null)
+            //{
+            //    ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
+            //}
+            //else
+            //{
+            //    ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
+            //}
+
             if (ModelState.IsValid)
             {
                 _context.Add(song);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(song);
+            return View("index");
         }
 
         // GET: Songs/Edit/5
