@@ -19,9 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.artist)
             </th>
-@*            <th>
-                @Html.DisplayNameFor(model => model.artist)
-            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.albums)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,12 +30,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.artist.Id)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.artist.Name)
             </td>
+            <td>
+                    @foreach(var album in item.albums)
+                    {
+                        @Html.DisplayFor(modelItem => album.Name)
+                         , 
+                    } 
+                    
+             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

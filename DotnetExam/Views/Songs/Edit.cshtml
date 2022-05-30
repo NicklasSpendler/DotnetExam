@@ -24,7 +24,7 @@
         </form>
     </div>
 </div>
-
+<br />
 <div class="artistList">
     <h2>Artist</h2>
     <hr />
@@ -38,8 +38,24 @@
             <input type="submit" value="Set Artist" class="btn-primary"/>
         </div>
     </form>
-
 </div>
+<br />
+
+@*<div class="AlbumsList">
+    <h2>Add Song to Album</h2>
+    <hr />
+    <form asp-action="AddSongToAlbum">
+        <input type="hidden" name="id" value="@Model.Song.Id"/>
+        <div class="form-group">
+            <label asp-for="" class="control-label">Set Song</label>
+            <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Set Artist" class="btn-primary"/>
+        </div>
+    </form>
+
+</div>*@
 
 <div>
     <a asp-action="Index">Back to List</a>

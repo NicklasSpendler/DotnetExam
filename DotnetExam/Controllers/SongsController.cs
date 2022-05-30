@@ -22,7 +22,7 @@ namespace DotnetExam.Controllers
         // GET: Songs
         public async Task<IActionResult> Index()
         {
-            var dotnetExamContext = _context.Song.Include(a => a.artist);
+            var dotnetExamContext = _context.Song.Include(a => a.artist).Include(b => b.albums);
             return View(await dotnetExamContext.ToListAsync());
 
             //return _context.Song != null ? 
@@ -54,6 +54,8 @@ namespace DotnetExam.Controllers
         {
 
                 ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
+
+                ViewData["Albums"] = new SelectList(_context.Album, "Id", "Name");
  
                 //ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
         
@@ -66,7 +68,7 @@ namespace DotnetExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ArtistId")] Song song)
+        public async Task<IActionResult> Create([Bind("Id,Name,ArtistId,albums")] Song song)
         {
 
             //if (song.artist == null)
