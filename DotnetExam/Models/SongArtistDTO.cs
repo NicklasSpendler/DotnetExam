@@ -5,5 +5,7 @@
 
         public Song? Song { get; set; }
         public int? ArtistId { get; set; }
+
+
     }
 }

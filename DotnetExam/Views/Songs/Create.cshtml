@@ -15,11 +15,16 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-                
+                <br />
+                <label asp-for="artist" class="control-label">Choose Artist</label>
                 <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
-                
+                <br />
+                <label asp-for="albums" class="control-label">Choose Album</label>
+                <select asp-for="albums" class="form-control" asp-items="ViewBag.Albums"></select>
+
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <span asp-validation-for="ArtistId" class="text-danger"></span>
+                <span asp-validation-for="albums" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

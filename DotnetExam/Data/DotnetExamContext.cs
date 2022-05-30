@@ -46,7 +46,7 @@ namespace DotnetExam.Data
         private void SeedArtists(ModelBuilder builder)
         {
 
-            var artist1 = new Artist() { Id = 1, Name = "Bob" };
+            var artist1 = new Artist() { Id = 1, Name = "No Artist" };
             builder.Entity<Artist>().HasData(artist1);
         }
 
