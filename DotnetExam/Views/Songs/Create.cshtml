@@ -15,9 +15,11 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-                
+                <br />
+                <label asp-for="artist" class="control-label">Kunstner</label>
                 <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.Artists"></select>
-                
+                <br />
+                <label asp-for="Name" class="control-label"></label>
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <span asp-validation-for="ArtistId" class="text-danger"></span>
             </div>
