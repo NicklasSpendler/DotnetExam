@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotnetExam.Models
 {
@@ -7,6 +8,7 @@ namespace DotnetExam.Models
         public int Id { get; set; }
         
         [Required]
+        [DisplayName("Artist name")] //Added til test i song/details
         public string Name { get; set; }
 
         public List<Song> ?Songs { get; set; }

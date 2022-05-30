@@ -9,6 +9,7 @@ namespace DotnetExam.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Song Name")]
         public string Name { get; set; }
         [DisplayName("Artist")]
         public Artist? artist { get; set; }

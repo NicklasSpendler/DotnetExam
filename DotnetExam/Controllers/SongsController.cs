@@ -38,7 +38,10 @@ namespace DotnetExam.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song.Include(s => s.comments)
+            var song = await _context.Song
+                .Include(s => s.comments).ThenInclude(x => x.user)
+                .Include(a => a.albums)
+                .Include(b => b.artist)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (song == null)
             {

@@ -34,7 +34,7 @@ namespace DotnetExam.Controllers
                 return NotFound();
             }
 
-            var artist = await _context.Artist
+            var artist = await _context.Artist.Include(s => s.Songs)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (artist == null)
             {
