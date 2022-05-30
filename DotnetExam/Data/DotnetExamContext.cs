@@ -92,6 +92,8 @@ namespace DotnetExam.Data
         public DbSet<DotnetExam.Models.Song> Song { get; set; }
 
         public DbSet<DotnetExam.Models.Comment>? Comment { get; set; }
+
+        public DbSet<DotnetExam.Models.Event>? Event { get; set; }
     }
 
 

@@ -1,7 +1,7 @@
-﻿namespace DotnetExam.Models
-{
-    public enum EventStatus
-    {
-        Draft, Published
-    }
-}
+﻿//namespace DotnetExam.Models
+//{
+//    public enum EventStatus
+//    {
+//        Draft, Published
+//    }
+//}
