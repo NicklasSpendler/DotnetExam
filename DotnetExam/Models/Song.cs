@@ -12,7 +12,7 @@ namespace DotnetExam.Models
         public string Name { get; set; }
         [DisplayName("Artist")]
         public Artist? artist { get; set; }
-        public int ArtistId { get; set; }
+        public int? ArtistId { get; set; }
 
         [JsonIgnore]
         public List<Album>? albums { get; set; }

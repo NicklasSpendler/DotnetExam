@@ -52,6 +52,13 @@ namespace DotnetExam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Album");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "bobs Sange"
+                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Artist", b =>
@@ -69,6 +76,13 @@ namespace DotnetExam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Artist");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bob"
+                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Comment", b =>
@@ -79,7 +93,7 @@ namespace DotnetExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
 
-                    b.Property<int>("SongId")
+                    b.Property<int?>("SongId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -100,6 +114,16 @@ namespace DotnetExam.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comment");
+
+                    b.HasData(
+                        new
+                        {
+                            CommentId = 1,
+                            SongId = 1,
+                            Text = "SeedData :)",
+                            TimeStamp = new DateTime(2022, 5, 30, 13, 41, 37, 256, DateTimeKind.Local).AddTicks(6150),
+                            UserId = "1"
+                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Song", b =>
@@ -110,18 +134,37 @@ namespace DotnetExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("artistId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("artistId");
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Song");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "god Sang"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 1,
+                            Name = "Dårlig Sang Sang"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistId = 1,
+                            Name = "Sindsyg Sang"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -239,6 +282,36 @@ namespace DotnetExam.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b43fdf0a-dfe4-49b8-8870-01ba8c6d872b",
+                            Email = "test1@test.dk",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1yKYiar0nxe2epISD2g/Z0Z4SOgiO8zweEiU8j+W0Core1cw6g5HJ/6/gjW2GE2Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6c75f031-4045-4117-af12-aa9b928605bd",
+                            TwoFactorEnabled = false,
+                            UserName = "Jesper"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95f2f836-cfbe-41a6-aa12-213dbda9e1d5",
+                            Email = "test@gmail.dk",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAELljsdHZTdw0HsJewZp8l+qtdP2bu3HdZSOUy3hXpFSSOgOKAIsbc1TGS1Kugi/L0A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dc3a8b87-f2c7-4bc0-8153-fe3cb051044c",
+                            TwoFactorEnabled = false,
+                            UserName = "Nicklas"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -345,9 +418,7 @@ namespace DotnetExam.Migrations
                 {
                     b.HasOne("DotnetExam.Models.Song", "Song")
                         .WithMany("comments")
-                        .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SongId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
                         .WithMany()
@@ -364,7 +435,7 @@ namespace DotnetExam.Migrations
                 {
                     b.HasOne("DotnetExam.Models.Artist", "artist")
                         .WithMany("Songs")
-                        .HasForeignKey("artistId");
+                        .HasForeignKey("ArtistId");
 
                     b.Navigation("artist");
                 });

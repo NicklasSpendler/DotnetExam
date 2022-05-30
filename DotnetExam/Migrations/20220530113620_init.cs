@@ -5,10 +5,36 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotnetExam.Migrations
 {
-    public partial class user : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Album",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Album", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Artist",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artist", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -46,6 +72,25 @@ namespace DotnetExam.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Song",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArtistId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Song", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Song_Artist_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artist",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +199,91 @@ namespace DotnetExam.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AlbumSong",
+                columns: table => new
+                {
+                    SongsId = table.Column<int>(type: "int", nullable: false),
+                    albumsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlbumSong", x => new { x.SongsId, x.albumsId });
+                    table.ForeignKey(
+                        name: "FK_AlbumSong_Album_albumsId",
+                        column: x => x.albumsId,
+                        principalTable: "Album",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AlbumSong_Song_SongsId",
+                        column: x => x.SongsId,
+                        principalTable: "Song",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SongId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comment_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comment_Song_SongId",
+                        column: x => x.SongId,
+                        principalTable: "Song",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Album",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "bobs Sange" });
+
+            migrationBuilder.InsertData(
+                table: "Artist",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Bob" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "1", 0, "d0fc41b8-caed-4e73-996f-df67341758c5", "test1@test.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEILCVUrGntoGuRsBANXPpdwcjMLcYiJWmeDyGK7l9m+TaOC+pa5U7lcse7aF2S80Xw==", null, false, "d1b4c3d5-76a1-4596-bea0-e563c8a3d666", false, "Jesper" },
+                    { "2", 0, "98c55da6-66fc-4fca-a755-90e134df3af3", "test@gmail.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEFKuDrsEoGGGHjn9J0Xtt4RYaHJX9PAIaHAMzqTF43qx2cxDvx0TVDvyPTVnkjbiew==", null, false, "241f227d-bb46-464a-9b90-16abfe42c9a1", false, "Nicklas" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Song",
+                columns: new[] { "Id", "ArtistId", "Name" },
+                values: new object[] { 1, null, "god Sang" });
+
+            migrationBuilder.InsertData(
+                table: "Comment",
+                columns: new[] { "CommentId", "SongId", "Text", "TimeStamp", "UserId" },
+                values: new object[] { 1, 1, "SeedData :)", new DateTime(2022, 5, 30, 13, 36, 20, 452, DateTimeKind.Local).AddTicks(3515), "1" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlbumSong_albumsId",
+                table: "AlbumSong",
+                column: "albumsId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -192,10 +322,28 @@ namespace DotnetExam.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_SongId",
+                table: "Comment",
+                column: "SongId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_UserId",
+                table: "Comment",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Song_ArtistId",
+                table: "Song",
+                column: "ArtistId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AlbumSong");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -212,10 +360,22 @@ namespace DotnetExam.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comment");
+
+            migrationBuilder.DropTable(
+                name: "Album");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Song");
+
+            migrationBuilder.DropTable(
+                name: "Artist");
         }
     }
 }

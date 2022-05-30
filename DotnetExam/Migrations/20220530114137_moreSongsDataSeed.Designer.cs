@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    [Migration("20220524082924_DTOstuff")]
-    partial class DTOstuff
+    [Migration("20220530114137_moreSongsDataSeed")]
+    partial class moreSongsDataSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,11 +48,19 @@ namespace DotnetExam.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Album");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "bobs Sange"
+                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Artist", b =>
@@ -70,6 +78,54 @@ namespace DotnetExam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Artist");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bob"
+                        });
+                });
+
+            modelBuilder.Entity("DotnetExam.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
+
+                    b.Property<int?>("SongId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("SongId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comment");
+
+                    b.HasData(
+                        new
+                        {
+                            CommentId = 1,
+                            SongId = 1,
+                            Text = "SeedData :)",
+                            TimeStamp = new DateTime(2022, 5, 30, 13, 41, 37, 256, DateTimeKind.Local).AddTicks(6150),
+                            UserId = "1"
+                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Song", b =>
@@ -80,18 +136,37 @@ namespace DotnetExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("artistId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("artistId");
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Song");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "god Sang"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 1,
+                            Name = "Dårlig Sang Sang"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistId = 1,
+                            Name = "Sindsyg Sang"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -209,6 +284,36 @@ namespace DotnetExam.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b43fdf0a-dfe4-49b8-8870-01ba8c6d872b",
+                            Email = "test1@test.dk",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1yKYiar0nxe2epISD2g/Z0Z4SOgiO8zweEiU8j+W0Core1cw6g5HJ/6/gjW2GE2Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6c75f031-4045-4117-af12-aa9b928605bd",
+                            TwoFactorEnabled = false,
+                            UserName = "Jesper"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95f2f836-cfbe-41a6-aa12-213dbda9e1d5",
+                            Email = "test@gmail.dk",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAELljsdHZTdw0HsJewZp8l+qtdP2bu3HdZSOUy3hXpFSSOgOKAIsbc1TGS1Kugi/L0A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dc3a8b87-f2c7-4bc0-8153-fe3cb051044c",
+                            TwoFactorEnabled = false,
+                            UserName = "Nicklas"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -311,11 +416,28 @@ namespace DotnetExam.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DotnetExam.Models.Comment", b =>
+                {
+                    b.HasOne("DotnetExam.Models.Song", "Song")
+                        .WithMany("comments")
+                        .HasForeignKey("SongId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Song");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("DotnetExam.Models.Song", b =>
                 {
                     b.HasOne("DotnetExam.Models.Artist", "artist")
                         .WithMany("Songs")
-                        .HasForeignKey("artistId");
+                        .HasForeignKey("ArtistId");
 
                     b.Navigation("artist");
                 });
@@ -374,6 +496,11 @@ namespace DotnetExam.Migrations
             modelBuilder.Entity("DotnetExam.Models.Artist", b =>
                 {
                     b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("DotnetExam.Models.Song", b =>
+                {
+                    b.Navigation("comments");
                 });
 #pragma warning restore 612, 618
         }

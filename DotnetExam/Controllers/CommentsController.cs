@@ -22,8 +22,10 @@ namespace DotnetExam.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user);
-            return View(await dotnetExamContext.ToListAsync());
+            
+            var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user).ToListAsync();
+
+            return View(await dotnetExamContext);
         }
 
         // GET: Comments/Details/5
