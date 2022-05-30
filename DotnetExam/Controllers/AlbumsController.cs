@@ -21,9 +21,16 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Albums
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Album.ToListAsync());
+            var albums = from a in _context.Album select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                albums = albums.Where(a => a.Name.Contains(searchString));
+            }
+
+            return View(await albums.ToListAsync());
         }
 
         // GET: Albums/Details/5

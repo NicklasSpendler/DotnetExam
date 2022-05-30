@@ -2,14 +2,22 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Songs";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-controller="Songs" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -34,7 +42,6 @@
                     @foreach(var album in item.albums)
                     {
                         @Html.DisplayFor(modelItem => album.Name)
-                         , 
                     } 
                     
              </td>

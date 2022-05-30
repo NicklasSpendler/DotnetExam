@@ -20,14 +20,16 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Songs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var dotnetExamContext = _context.Song.Include(a => a.artist).Include(b => b.albums);
-            return View(await dotnetExamContext.ToListAsync());
 
-            //return _context.Song != null ? 
-            //            View(await _context.Song.ToListAsync()) :
-            //            Problem("Entity set 'DotnetExamContext.Song'  is null.");
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dotnetExamContext = dotnetExamContext.Where(s => s.Name.Contains(searchString)).Include(a => a.artist).Include(b => b.albums);
+            }
+
+            return View(await dotnetExamContext.ToListAsync());
         }
 
         // GET: Songs/Details/5
