@@ -43,3 +43,36 @@ li{
     color: black;
     text-decoration: none;
 }
+
+.home__nav__container > .home__nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem
+}
+.home__nav__button {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 11px -3px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 11px -3px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 11px -3px rgba(0,0,0,0.2);
+    transition: all, 0.5s;
+    color: rgba(0, 0, 0, 0.50);
+}
+    .home__nav__button:hover {
+        -webkit-box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.37);
+        -moz-box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.37);
+        box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.37);
+        color: black;
+    }
+
+.home__nav__anchor {
+    color: black;
+    text-decoration: none;
+    transition: all, .5s;
+}
+.home__nav__anchor:hover {
+    color: lightgrey;
+}
