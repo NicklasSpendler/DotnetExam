@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<DotnetExam.Models.Comment>
 
+@inject SignInManager<IdentityUser> SignInManager
+
 @{
     ViewData["Title"] = "Comments";
 }
@@ -7,7 +9,10 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
 
 <form asp-controller="Comments" asp-action="Index" method="get">
@@ -51,9 +56,12 @@
                 @Html.DisplayFor(modelItem => item.user.UserName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CommentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CommentId">Delete</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> <span>|</span>
+                    <a asp-action="Details" asp-route-id="@item.CommentId">Details</a> <span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.CommentId">Delete</a>
+                }
             </td>
         </tr>
 }
