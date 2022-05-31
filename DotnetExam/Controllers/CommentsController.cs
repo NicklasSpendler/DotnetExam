@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotnetExam.Data;
 using DotnetExam.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetExam.Controllers
 {
+
     public class CommentsController : Controller
     {
         private readonly DotnetExamContext _context;
@@ -20,6 +22,7 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Comments
+
         public async Task<IActionResult> Index(string searchString)
         {
             var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user);
