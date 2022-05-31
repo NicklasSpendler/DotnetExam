@@ -21,17 +21,17 @@
             @Html.DisplayNameFor(model => model.Songs)
         </dt>
 
-@foreach (var Song in Model.Songs)
+
+    <ul>
+    @foreach (var song in Model.Songs)
     {
-        <div class= row>
-        <div class="col-md-4">
-            <div>
-                @Song.Name
-                <br>
-            </div>
-        </div>
-        </div>
+        <a class="anchorOfItem" href="/Songs/Details/@song.Id">
+            <li data-id="@song.Id">@song.Name</li>
+        </a>
+
+
     }
+    </ul>
 
     </dl>
 </div>

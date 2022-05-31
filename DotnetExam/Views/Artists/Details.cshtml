@@ -16,24 +16,26 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-
-                <dt class = "col-sm-2">
+        
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Songs)
         </dt>
+        <dd>
+
+        </dd>
+
+    </dl>
+    <br />
 
 @foreach (var song in Model.Songs)
     {
-        <div class= row>
-        <div class="col-md-4">
-            <div>
-                @song.Name
-                <br>
-            </div>
-        </div>
-        </div>
-    }*
+    
+        <a class="anchorOfItem" href="/Songs/Details/@song.Id">
+            <li data-id="@song.Id">@song.Name</li>
+        </a>
+    }
 
-    </dl>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
