@@ -25,6 +25,12 @@ namespace DotnetExam.Data
             SeedArtists(builder);
             SeedComment(builder);
             SeedAlbum(builder);
+
+            builder.Entity<Artist>().HasMany(a => a.Songs).WithOne(s => s.artist).HasForeignKey(s => s.ArtistId).OnDelete(DeleteBehavior.Cascade);
+            
+            //model.Entity<Post>().HasOne(p => p.Blog).WithMany(b => b.Posts)
+            //.HasForeignKey(p => p.BlogId)
+            //.OnDelete(DeleteBehavior.Cascade);
         }
 
         public void SeedSongs(ModelBuilder builder)
