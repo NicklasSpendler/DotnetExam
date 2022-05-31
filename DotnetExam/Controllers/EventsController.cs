@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,107 +10,90 @@ using DotnetExam.Models;
 
 namespace DotnetExam.Controllers
 {
-    public class ArtistsController : Controller
+    public class EventsController : Controller
     {
         private readonly DotnetExamContext _context;
 
-        public ArtistsController(DotnetExamContext context)
+        public EventsController(DotnetExamContext context)
         {
             _context = context;
         }
 
-        // GET: Artists
-        public async Task<IActionResult> Index(string searchString)
+        // GET: Events
+        public async Task<IActionResult> Index()
         {
-
-            var artists =  from a in _context.Artist select a;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                artists = artists.Where(a => a.Name.Contains(searchString));
-            }
-
-            //_context.Song.Where(s => s.Id == id)
-
-            return View(await artists.ToListAsync());
+            var dotnetExamContext = _context.Event.Include(e => e.User);
+            return View(await dotnetExamContext.ToListAsync());
         }
 
-        // GET: Artists/Details/5
+        // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Event == null)
             {
                 return NotFound();
             }
 
-            var artist = await _context.Artist.Include(s => s.Songs)
+            var @event = await _context.Event
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (artist == null)
+            if (@event == null)
             {
                 return NotFound();
             }
 
-            return View(artist);
+            return View(@event);
         }
 
-        // GET: Artists/Create
+        // GET: Events/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Artists/Create
+        // POST: Events/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Artist artist)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,StartDate,Enddate,Location,Status,UserId")] Event @event)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artist);
+                _context.Add(@event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(artist);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", @event.UserId);
+            return View(@event);
         }
 
-        // GET: Artists/Edit/5
+        // GET: Events/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            //Variable artist der indeholder = fra context - fra artist -
-
-            var artist = await _context.Artist.
-                Include(s => s.Songs).
-                FirstAsync(a => a.Id == id);
-
-            //ViewData["Songs"] = new SelectList(_context.Song, "id", "Name");
-
-            ViewData["Songs"] = _context.Song.ToList();
-
-            if (artist == null)
+            if (id == null || _context.Event == null)
             {
                 return NotFound();
             }
 
-
-            return View(new ArtistSongDTO() { Artist = artist });
+            var @event = await _context.Event.FindAsync(id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", @event.UserId);
+            return View(@event);
         }
 
-        // POST: Artists/Edit/5
+        // POST: Events/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //spørg christian vedrørende 'bind'
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Artist artist)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,StartDate,Enddate,Location,Status,UserId")] Event @event)
         {
-
-            if (id != artist.Id)
+            if (id != @event.Id)
             {
                 return NotFound();
             }
@@ -120,12 +102,12 @@ namespace DotnetExam.Controllers
             {
                 try
                 {
-                    _context.Update(artist);
+                    _context.Update(@event);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtistExists(artist.Id))
+                    if (!EventExists(@event.Id))
                     {
                         return NotFound();
                     }
@@ -136,57 +118,51 @@ namespace DotnetExam.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(artist);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", @event.UserId);
+            return View(@event);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> addSong(int id, [Bind("SongId")] ArtistSongDTO artist)
-        {
-            var selectedArtist = await _context.Artist.Where(a => a.Id == id).Include(a => a.Songs).FirstOrDefaultAsync();
-
-            var selectedSong = await _context.Song.FindAsync(artist.SongId);
-
-            selectedArtist.Songs.Add(selectedSong);
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Index");
-        }
-
-
-        // GET: Artists/Delete/5
+        // GET: Events/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Event == null)
             {
                 return NotFound();
             }
 
-            var artist = await _context.Artist
+            var @event = await _context.Event
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (artist == null)
+            if (@event == null)
             {
                 return NotFound();
             }
 
-            return View(artist);
+            return View(@event);
         }
 
-        // POST: Artists/Delete/5
+        // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var artist = await _context.Artist.FindAsync(id);
-            _context.Artist.Remove(artist);
+            if (_context.Event == null)
+            {
+                return Problem("Entity set 'DotnetExamContext.Event'  is null.");
+            }
+            var @event = await _context.Event.FindAsync(id);
+            if (@event != null)
+            {
+                _context.Event.Remove(@event);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtistExists(int id)
+        private bool EventExists(int id)
         {
-            return _context.Artist.Any(e => e.Id == id);
+          return (_context.Event?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

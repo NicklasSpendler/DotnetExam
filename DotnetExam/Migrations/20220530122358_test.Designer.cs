@@ -4,6 +4,7 @@ using DotnetExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    partial class DotnetExamContextModelSnapshot : ModelSnapshot
+    [Migration("20220530122358_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace DotnetExam.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "No Artist"
+                            Name = "Bob"
                         });
                 });
 
@@ -126,7 +128,7 @@ namespace DotnetExam.Migrations
                             CommentId = 1,
                             SongId = 1,
                             Text = "SeedData :)",
-                            TimeStamp = new DateTime(2022, 5, 30, 14, 28, 48, 129, DateTimeKind.Local).AddTicks(5815),
+                            TimeStamp = new DateTime(2022, 5, 30, 14, 23, 58, 325, DateTimeKind.Local).AddTicks(8763),
                             UserId = "1"
                         });
                 });
@@ -338,13 +340,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0aa2cca6-476f-471b-a81b-2e917d0daf1a",
+                            ConcurrencyStamp = "f28248da-3972-4617-9c88-2ffdb8f68086",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEJYHRp4yNf5AGFKbgnUrOkUJ2uKiVm9w+4KxbX0E+KRVVbhKZ0ZI6PpND1FIGQPGKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPlCmKso44xOCll7MLJsycTYvZkob5Gv7Oz5wj9VILcv/p5RtTqWxpWrPZK/17VmjA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "67e42bd8-6611-4c94-967f-2c2ff4fecf47",
+                            SecurityStamp = "e65b7d5e-762a-4785-b9f7-e328e218534e",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -352,13 +354,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "645d0486-ba26-4d26-ba3c-9b8c2f3b196b",
+                            ConcurrencyStamp = "e06e7083-b70d-4d04-95f7-9d49eefe0072",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECApSBrkb4eEware1cEqJpPwG6hwRiii4yDOxvdXJtpuNeWMMozdULPKlJWv6zf7nw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAgXwU9Fn0QIlCCzGcE+3l1i3LMA6Rc+8XcRv64hZWOijVgiTbRYsvj+pC3rxUpQxQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dfe0a6ce-f871-4d88-abc4-e4eb7046703c",
+                            SecurityStamp = "08b482e7-c7d4-4fac-b7ae-47de908c8929",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });
