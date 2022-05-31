@@ -38,3 +38,8 @@ li{
     align-items: center;
     margin-bottom: 1rem;
 }
+
+.anchorOfItem {
+    color: black;
+    text-decoration: none;
+}

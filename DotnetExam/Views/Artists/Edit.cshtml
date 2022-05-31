@@ -28,12 +28,15 @@
 <div class="songList">
     <h2>Song List</h2>
     <hr />
+    
     <form asp-action="addSong">
     <input type="hidden" name="Id" value="@Model.Artist.Id"/>
     <select id="SongId" class="form-control" name="SongId">
     @foreach (var song in ViewBag.Songs)
     {
-        <option value="@song.Id">@song.Name</option>
+        <option value="@song.Id">
+                @song.Name
+        </option>
     }
     </select>
     <div class="form-group">
@@ -44,7 +47,9 @@
     <ul>
     @foreach (var song in Model.Artist.Songs)
     {
-        <li data-id="@song.Id">@song.Name</li>
+        <a class="anchorOfItem" href="/Songs/Details/@song.Id">
+            <li data-id="@song.Id">@song.Name</li>
+        </a>
     }
     </ul>
     </div>
