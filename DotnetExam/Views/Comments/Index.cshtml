@@ -50,10 +50,16 @@
                 @Html.DisplayFor(modelItem => item.TimeStamp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Song.Name)
+                @if(item.Song != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Song.Name)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.user.UserName)
+                @if(item.user != null)
+                {
+                    @Html.DisplayFor(modelItem => item.user.UserName)
+                }
             </td>
             <td>
                 @if (SignInManager.IsSignedIn(User))

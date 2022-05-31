@@ -42,9 +42,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a class="anchorOfItem" href="/Songs/Details/@item.artist.Id">
-                @Html.DisplayFor(modelItem => item.artist.Name)
-                </a>
+                @if(@item.artist != null)
+                {
+                    <a class="anchorOfItem" href="/Songs/Details/@item.artist.Id">
+                    @Html.DisplayFor(modelItem => item.artist.Name)
+                    </a>
+                }
             </td>
             <td>
 
