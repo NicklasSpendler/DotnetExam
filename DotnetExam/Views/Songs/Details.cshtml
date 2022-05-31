@@ -19,14 +19,19 @@
         </dd>
 
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.artist.Name)
+            @if(@Model.artist != null)
+            {
+                @Html.DisplayNameFor(model => model.artist.Name)
+            }
         </dt>
         
         <dd class = "col-sm-10">
-
-        <a class="anchorOfItem" href="/Artists/Details/@Model.artist.Id">
-        @Html.DisplayFor(model => model.artist.Name)
-        <a>
+        @if(@Model.artist != null)
+        {
+            <a class="anchorOfItem" href="/Artists/Details/@Model.artist.Id">
+                @Html.DisplayFor(model => model.artist.Name)
+            </a>
+        }
         </dd>
 
         <dt class = "col-sm-2">
@@ -34,18 +39,20 @@
         </dt>
 
 
-@foreach (var album in Model.albums)
-    {
-        <div class=row>
-            <div class="col-md-4">
-                <div>
-                    <a class="anchorOfItem" href="/Albums/Details/@album.Id">
-                    @Html.DisplayFor(model => album.Name)
-                    </a>
-                    <br>
+@if(@Model.albums != null){
+    @foreach (var album in Model.albums)
+        {
+            <div class=row>
+                <div class="col-md-4">
+                    <div>
+                        <a class="anchorOfItem" href="/Albums/Details/@album.Id">
+                        @Html.DisplayFor(model => album.Name)
+                        </a>
+                        <br>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
 
 
@@ -54,21 +61,22 @@
         </dt>
 
     
-
-    @foreach (var comment in Model.comments)
+    @if (@Model.comments != null)
     {
-        <div class= row>
-        <div class="col-md-4">
-            <div>
-                @comment.user.Email
+        @foreach (var comment in Model.comments)
+        {
+            <div class= row>
+                <div class="col-md-4">
+                    <div>
+                        @comment.user.Email
+                    </div>
+                    <div>
+                        @comment.Text
+                    </div>
+                </div>
             </div>
-            <div>
-                @comment.Text
-            </div>
-        </div>
-        </div>
+        }
     }
-
 </div>
 
 <div>
