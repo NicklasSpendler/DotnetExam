@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<DotnetExam.Models.Event>
 
+@inject SignInManager<IdentityUser> SignInManager
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,7 +9,10 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-action="Create">Create New</a>
+        }
 </p>
 <table class="table">
     <thead>
