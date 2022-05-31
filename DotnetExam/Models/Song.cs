@@ -16,6 +16,7 @@ namespace DotnetExam.Models
         public int? ArtistId { get; set; }
 
         [JsonIgnore]
+        [DisplayName("Albums")]
         public List<Album>? albums { get; set; }
 
         public List<Comment>? comments { get; set; }

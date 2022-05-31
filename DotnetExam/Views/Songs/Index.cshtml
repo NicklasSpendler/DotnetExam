@@ -27,6 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.artist)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.albums)
+            </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -39,10 +45,9 @@
                 @Html.DisplayFor(modelItem => item.artist.Name)
             </td>
             <td>
-                    @foreach(var album in item.albums)
-                    {
-                        @Html.DisplayFor(modelItem => album.Name)
-                    } 
+
+                @Html.DisplayFor(modelItem => item.albums)
+
                     
              </td>
             <td>
