@@ -20,12 +20,17 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            
-            var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user).ToListAsync();
+            var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user);
 
-            return View(await dotnetExamContext);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dotnetExamContext = dotnetExamContext.Where(s => s.Text.Contains(searchString)).Include(c => c.Song).Include(c => c.user);
+            }
+
+            return View(await dotnetExamContext.ToListAsync());
         }
 
         // GET: Comments/Details/5
