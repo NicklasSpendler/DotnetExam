@@ -12837,7 +12837,7 @@ li {
     }
 
 .home__nav__anchor {
-    color: black;
+    color: white !important;
     text-decoration: none;
     transition: all, .5s;
 }
