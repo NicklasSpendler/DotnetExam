@@ -4,6 +4,7 @@ using DotnetExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    partial class DotnetExamContextModelSnapshot : ModelSnapshot
+    [Migration("20220602110310_freshstart2")]
+    partial class freshstart2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,18 +54,6 @@ namespace DotnetExam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Album");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "bobs Sange"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Space Jedi"
-                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Artist", b =>
@@ -81,48 +71,6 @@ namespace DotnetExam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Artist");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "No Artist"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ted Sheeran"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Joke Loading..."
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Dark Mode On"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Rubber Duck"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Claustrophobic astronaut"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Scrum"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Noobgrammer"
-                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Comment", b =>
@@ -159,24 +107,6 @@ namespace DotnetExam.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comment");
-
-                    b.HasData(
-                        new
-                        {
-                            CommentId = 1,
-                            SongId = 1,
-                            Text = "Klaustrfobisk astronaut... Lol!",
-                            TimeStamp = new DateTime(2022, 6, 2, 13, 6, 40, 94, DateTimeKind.Local).AddTicks(6661),
-                            UserId = "1"
-                        },
-                        new
-                        {
-                            CommentId = 2,
-                            SongId = 1,
-                            Text = "Give the man some SPACE!",
-                            TimeStamp = new DateTime(2022, 6, 2, 13, 6, 40, 94, DateTimeKind.Local).AddTicks(6695),
-                            UserId = "2"
-                        });
                 });
 
             modelBuilder.Entity("DotnetExam.Models.Event", b =>
@@ -244,80 +174,6 @@ namespace DotnetExam.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Song");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ArtistId = 6,
-                            Name = "Whole lotta Space"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ArtistId = 6,
-                            Name = "Diet - byte sized"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ArtistId = 6,
-                            Name = "JabbaScript"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ArtistId = 5,
-                            Name = "god Sang"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ArtistId = 4,
-                            Name = "Dårlig Sang Sang"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ArtistId = 3,
-                            Name = "Sindsyg Sang"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ArtistId = 2,
-                            Name = "god Sang"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ArtistId = 2,
-                            Name = "Dårlig Sang Sang"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ArtistId = 3,
-                            Name = "Sindsyg Sang"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ArtistId = 3,
-                            Name = "god Sang"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ArtistId = 4,
-                            Name = "Dårlig Sang Sang"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ArtistId = 6,
-                            Name = "Sindsyg Sang"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -435,36 +291,6 @@ namespace DotnetExam.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf114cbf-cf32-473a-9af6-3785d6c87d01",
-                            Email = "test1@test.dk",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEAeFZd+QqmSUcLvW2Ttbv19rJ+x5N4OJNBn5IOJwXwL0lh4um7NFWGPX3xs15kd/qg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5b9f1aae-361d-482a-a9c6-ca5e09160c76",
-                            TwoFactorEnabled = false,
-                            UserName = "Jesper"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "81f3afcf-4890-4d51-af1d-7e84a7829496",
-                            Email = "test@gmail.dk",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEIUtIlvJnLhDcBVmxxCYxZYyqwCzfxQvrt0jUFfWV80N8RUJs8Fc497cNMM4viaacw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "55986278-9186-45d7-ab11-e0792e736ad3",
-                            TwoFactorEnabled = false,
-                            UserName = "Nicklas"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

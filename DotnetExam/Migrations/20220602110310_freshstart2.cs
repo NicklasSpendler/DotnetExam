@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotnetExam.Migrations
 {
-    public partial class init : Migration
+    public partial class freshstart2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,8 +90,7 @@ namespace DotnetExam.Migrations
                         name: "FK_Song_Artist_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artist",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -287,45 +286,6 @@ namespace DotnetExam.Migrations
                         principalTable: "Song",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.InsertData(
-                table: "Album",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "bobs Sange" });
-
-            migrationBuilder.InsertData(
-                table: "Artist",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "No Artist" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "1", 0, "1de2a789-677f-48bd-934a-0a80c06b258d", "test1@test.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEP1NxKSZ3FKPbNOMd5M4e97yg20BVrkozl7rRY9m8BqeQXqJnfg0ACzhOdzRA3vsQA==", null, false, "6be40511-2e19-4ddd-a8ef-c64c76ffa2a0", false, "Jesper" },
-                    { "2", 0, "3143e38d-3545-45ac-86d0-ba15f1593655", "test@gmail.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEDpSWlCdudRr8A0w8YCZOwnIVqLpErRajWxLB8pp6dsxZRpjsnFVT1NgCU/n9J3cKQ==", null, false, "5bc782cc-0470-449f-8faa-86c92f96ffa8", false, "Nicklas" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Song",
-                columns: new[] { "Id", "ArtistId", "Name" },
-                values: new object[] { 1, null, "god Sang" });
-
-            migrationBuilder.InsertData(
-                table: "Comment",
-                columns: new[] { "CommentId", "EventId", "SongId", "Text", "TimeStamp", "UserId" },
-                values: new object[] { 1, null, 1, "SeedData :)", new DateTime(2022, 5, 31, 19, 38, 20, 382, DateTimeKind.Local).AddTicks(4625), "1" });
-
-            migrationBuilder.InsertData(
-                table: "Song",
-                columns: new[] { "Id", "ArtistId", "Name" },
-                values: new object[] { 2, 1, "Dårlig Sang Sang" });
-
-            migrationBuilder.InsertData(
-                table: "Song",
-                columns: new[] { "Id", "ArtistId", "Name" },
-                values: new object[] { 3, 1, "Sindsyg Sang" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AlbumSong_albumsId",

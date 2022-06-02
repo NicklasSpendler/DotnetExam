@@ -35,6 +35,7 @@ namespace DotnetExam.Controllers
             return View(await dotnetExamContext.ToListAsync());
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> SongAPI(string searchString)
         {
             var dotnetExamContext = _context.Song.Include(a => a.artist).Include(b => b.albums);
@@ -44,8 +45,9 @@ namespace DotnetExam.Controllers
                 dotnetExamContext = dotnetExamContext.Where(s => s.Name.Contains(searchString)).Include(a => a.artist).Include(b => b.albums);
             }
 
-            return Ok(await dotnetExamContext.ToListAsync());
+            return Ok( await dotnetExamContext.ToListAsync());
         }
+
 
         // GET: Songs/Details/5
         public async Task<IActionResult> Details(int? id)

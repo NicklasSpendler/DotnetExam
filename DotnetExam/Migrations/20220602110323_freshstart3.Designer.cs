@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    [Migration("20220531173820_init")]
-    partial class init
+    [Migration("20220602110323_freshstart3")]
+    partial class freshstart3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,6 +60,11 @@ namespace DotnetExam.Migrations
                         {
                             Id = 1,
                             Name = "bobs Sange"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Space Jedi"
                         });
                 });
 
@@ -84,6 +89,41 @@ namespace DotnetExam.Migrations
                         {
                             Id = 1,
                             Name = "No Artist"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Ted Sheeran"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Joke Loading..."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Dark Mode On"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Rubber Duck"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Claustrophobic astronaut"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Scrum"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Noobgrammer"
                         });
                 });
 
@@ -127,9 +167,17 @@ namespace DotnetExam.Migrations
                         {
                             CommentId = 1,
                             SongId = 1,
-                            Text = "SeedData :)",
-                            TimeStamp = new DateTime(2022, 5, 31, 19, 38, 20, 382, DateTimeKind.Local).AddTicks(4625),
+                            Text = "Klaustrfobisk astronaut... Lol!",
+                            TimeStamp = new DateTime(2022, 6, 2, 13, 3, 22, 970, DateTimeKind.Local).AddTicks(8307),
                             UserId = "1"
+                        },
+                        new
+                        {
+                            CommentId = 2,
+                            SongId = 1,
+                            Text = "Give the man some SPACE!",
+                            TimeStamp = new DateTime(2022, 6, 2, 13, 3, 22, 970, DateTimeKind.Local).AddTicks(8342),
+                            UserId = "2"
                         });
                 });
 
@@ -203,18 +251,73 @@ namespace DotnetExam.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "god Sang"
+                            ArtistId = 6,
+                            Name = "Whole lotta Space"
                         },
                         new
                         {
                             Id = 2,
-                            ArtistId = 1,
-                            Name = "Dårlig Sang Sang"
+                            ArtistId = 6,
+                            Name = "Diet - byte sized"
                         },
                         new
                         {
                             Id = 3,
-                            ArtistId = 1,
+                            ArtistId = 6,
+                            Name = "JabbaScript"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArtistId = 5,
+                            Name = "god Sang"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArtistId = 4,
+                            Name = "Dårlig Sang Sang"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArtistId = 3,
+                            Name = "Sindsyg Sang"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArtistId = 2,
+                            Name = "god Sang"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ArtistId = 2,
+                            Name = "Dårlig Sang Sang"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ArtistId = 3,
+                            Name = "Sindsyg Sang"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArtistId = 3,
+                            Name = "god Sang"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ArtistId = 4,
+                            Name = "Dårlig Sang Sang"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ArtistId = 6,
                             Name = "Sindsyg Sang"
                         });
                 });
@@ -340,13 +443,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1de2a789-677f-48bd-934a-0a80c06b258d",
+                            ConcurrencyStamp = "5809a232-32e0-40dc-b700-7959625059af",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEP1NxKSZ3FKPbNOMd5M4e97yg20BVrkozl7rRY9m8BqeQXqJnfg0ACzhOdzRA3vsQA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI5IKu3G1TsZ3TFMvHLTYClogv0uDijvhot2eydoLdi3M6AzHHdOA5dBRbZLWhr0XA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6be40511-2e19-4ddd-a8ef-c64c76ffa2a0",
+                            SecurityStamp = "b8c3af20-f0e0-4c04-93aa-2fa518fa6fed",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -354,13 +457,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3143e38d-3545-45ac-86d0-ba15f1593655",
+                            ConcurrencyStamp = "fe85c753-df72-4b90-ad05-0abfa5214362",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDpSWlCdudRr8A0w8YCZOwnIVqLpErRajWxLB8pp6dsxZRpjsnFVT1NgCU/n9J3cKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECEGe747yQvXcHmV9oXQ9DXTIkBMMiy/IjYXb1x0CJizASF9XiiWlDw7aMU3cVJhAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5bc782cc-0470-449f-8faa-86c92f96ffa8",
+                            SecurityStamp = "a512b7b9-b3ad-478b-b7a4-1861cf6bf672",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });
@@ -508,8 +611,7 @@ namespace DotnetExam.Migrations
                 {
                     b.HasOne("DotnetExam.Models.Artist", "artist")
                         .WithMany("Songs")
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ArtistId");
 
                     b.Navigation("artist");
                 });

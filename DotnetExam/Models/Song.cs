@@ -10,15 +10,18 @@ namespace DotnetExam.Models
 
         [Required]
         [DisplayName("Song Name")]
+        
         public string Name { get; set; }
+        
         [DisplayName("Artist")]
+        
         public Artist? artist { get; set; }
         public int? ArtistId { get; set; }
 
-        [JsonIgnore]
-        [DisplayName("Albums")]
-        public ICollection<Album>? albums { get; set; }
-        public ICollection<Comment>? comments { get; set; }
+        
+        [DisplayName("On Number of Albums")]
+        public List<Album>? albums { get; set; }
+        public List<Comment>? comments { get; set; }
         
     }
 }

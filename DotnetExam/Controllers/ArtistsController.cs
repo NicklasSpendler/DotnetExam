@@ -36,20 +36,7 @@ namespace DotnetExam.Controllers
             return View(await artists.ToListAsync());
         }
 
-        public async Task<ActionResult> ArtistAPI(string searchString)
-        {
 
-            var artists = from a in _context.Artist select a;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                artists = artists.Where(a => a.Name.Contains(searchString));
-            }
-
-            //_context.Song.Where(s => s.Id == id)
-
-            return Ok(artists);
-        }
 
         // GET: Artists/Details/5
         public async Task<IActionResult> Details(int? id)
