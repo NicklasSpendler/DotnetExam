@@ -126,7 +126,7 @@ namespace DotnetExam.Migrations
                             CommentId = 1,
                             SongId = 1,
                             Text = "SeedData :)",
-                            TimeStamp = new DateTime(2022, 5, 31, 17, 29, 9, 569, DateTimeKind.Local).AddTicks(3083),
+                            TimeStamp = new DateTime(2022, 5, 31, 19, 38, 20, 382, DateTimeKind.Local).AddTicks(4625),
                             UserId = "1"
                         });
                 });
@@ -338,13 +338,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "daaf0675-5333-42cf-ae6a-069ef0698329",
+                            ConcurrencyStamp = "1de2a789-677f-48bd-934a-0a80c06b258d",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELIJQOhVcMbX+0KNG2AHBSkDxEEm/l91kMxMO8STMbWWx/QwEBjAooTLx/QWM1HQmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP1NxKSZ3FKPbNOMd5M4e97yg20BVrkozl7rRY9m8BqeQXqJnfg0ACzhOdzRA3vsQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "309a8f5d-0f71-419e-977f-083cc16c685c",
+                            SecurityStamp = "6be40511-2e19-4ddd-a8ef-c64c76ffa2a0",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -352,13 +352,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b6dd9f30-ccbc-42e1-b794-40ead3e6fdbc",
+                            ConcurrencyStamp = "3143e38d-3545-45ac-86d0-ba15f1593655",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECTOFXKVUgx15z09eMWf1ocrK17iTjeiWCQeKgoT6glxCE4YliZa8tFj/kr8WZ+x1Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDpSWlCdudRr8A0w8YCZOwnIVqLpErRajWxLB8pp6dsxZRpjsnFVT1NgCU/n9J3cKQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "707df4ba-97d0-4453-ac8d-2d872d8cee77",
+                            SecurityStamp = "5bc782cc-0470-449f-8faa-86c92f96ffa8",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });
@@ -466,7 +466,7 @@ namespace DotnetExam.Migrations
 
             modelBuilder.Entity("DotnetExam.Models.Comment", b =>
                 {
-                    b.HasOne("DotnetExam.Models.Event", "Event")
+                    b.HasOne("DotnetExam.Models.Event", null)
                         .WithMany("Comments")
                         .HasForeignKey("EventId");
 
@@ -479,8 +479,6 @@ namespace DotnetExam.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Event");
 
                     b.Navigation("Song");
 

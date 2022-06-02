@@ -36,6 +36,21 @@ namespace DotnetExam.Controllers
             return View(await artists.ToListAsync());
         }
 
+        public async Task<ActionResult> ArtistAPI(string searchString)
+        {
+
+            var artists = from a in _context.Artist select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                artists = artists.Where(a => a.Name.Contains(searchString));
+            }
+
+            //_context.Song.Where(s => s.Id == id)
+
+            return Ok(artists);
+        }
+
         // GET: Artists/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -179,6 +194,15 @@ namespace DotnetExam.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var artist = await _context.Artist.FindAsync(id);
+
+            var songs = await _context.Song.Where(x => x.ArtistId == id).ToListAsync();
+
+            foreach (var song in songs)
+            {
+                song.ArtistId = null;
+            }
+
+            _context.UpdateRange(songs);
             _context.Artist.Remove(artist);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

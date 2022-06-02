@@ -10,7 +10,7 @@ namespace DotnetExam.Models
         public String Name { get; set; }
 
         [JsonIgnore]
-        public List<Song> ?Songs { get; set; }
+        public ICollection<Song> ?Songs { get; set; }
 
     }
 

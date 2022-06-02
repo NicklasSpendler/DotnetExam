@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    [Migration("20220530122848_changedPositionOfEnumEventStatus")]
-    partial class changedPositionOfEnumEventStatus
+    [Migration("20220531173820_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,7 +83,7 @@ namespace DotnetExam.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Bob"
+                            Name = "No Artist"
                         });
                 });
 
@@ -128,7 +128,7 @@ namespace DotnetExam.Migrations
                             CommentId = 1,
                             SongId = 1,
                             Text = "SeedData :)",
-                            TimeStamp = new DateTime(2022, 5, 30, 14, 28, 48, 129, DateTimeKind.Local).AddTicks(5815),
+                            TimeStamp = new DateTime(2022, 5, 31, 19, 38, 20, 382, DateTimeKind.Local).AddTicks(4625),
                             UserId = "1"
                         });
                 });
@@ -340,13 +340,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d630583-51d5-4d8e-ac68-fe99a98ece7b",
+                            ConcurrencyStamp = "1de2a789-677f-48bd-934a-0a80c06b258d",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEC3VpwNQLmTIcGgaRED8fymVtACt8fPr8oyYUb3L9WSYUJpWmLMebAQk2hG6/JUAaQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP1NxKSZ3FKPbNOMd5M4e97yg20BVrkozl7rRY9m8BqeQXqJnfg0ACzhOdzRA3vsQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "50e39d36-206a-4d44-b53d-d5962e028776",
+                            SecurityStamp = "6be40511-2e19-4ddd-a8ef-c64c76ffa2a0",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -354,13 +354,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "98fcb9d9-1f02-4e93-b9ea-873a342afe23",
+                            ConcurrencyStamp = "3143e38d-3545-45ac-86d0-ba15f1593655",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECLBOVmbDX81p8cjSjQ/sb5gcjlE4ij21otgofRur1uphXOWY8wweZmoQ7hIXLdI8A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDpSWlCdudRr8A0w8YCZOwnIVqLpErRajWxLB8pp6dsxZRpjsnFVT1NgCU/n9J3cKQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b35bca9-2490-46c6-9c76-c208d06b8399",
+                            SecurityStamp = "5bc782cc-0470-449f-8faa-86c92f96ffa8",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });
@@ -468,7 +468,7 @@ namespace DotnetExam.Migrations
 
             modelBuilder.Entity("DotnetExam.Models.Comment", b =>
                 {
-                    b.HasOne("DotnetExam.Models.Event", "Event")
+                    b.HasOne("DotnetExam.Models.Event", null)
                         .WithMany("Comments")
                         .HasForeignKey("EventId");
 
@@ -481,8 +481,6 @@ namespace DotnetExam.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Event");
 
                     b.Navigation("Song");
 
@@ -510,7 +508,8 @@ namespace DotnetExam.Migrations
                 {
                     b.HasOne("DotnetExam.Models.Artist", "artist")
                         .WithMany("Songs")
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("artist");
                 });

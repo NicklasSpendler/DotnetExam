@@ -35,6 +35,18 @@ namespace DotnetExam.Controllers
             return View(await dotnetExamContext.ToListAsync());
         }
 
+        public async Task<ActionResult> SongAPI(string searchString)
+        {
+            var dotnetExamContext = _context.Song.Include(a => a.artist).Include(b => b.albums);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dotnetExamContext = dotnetExamContext.Where(s => s.Name.Contains(searchString)).Include(a => a.artist).Include(b => b.albums);
+            }
+
+            return Ok(await dotnetExamContext.ToListAsync());
+        }
+
         // GET: Songs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -208,6 +220,16 @@ namespace DotnetExam.Controllers
             {
                 return Problem("Entity set 'DotnetExamContext.Song'  is null.");
             }
+
+            var comment = await _context.Comment.Where(c => c.SongId == id).ToListAsync();
+
+            if(comment != null)
+            {
+                _context.Comment.RemoveRange(comment);
+
+                await _context.SaveChangesAsync();
+            }
+
             var song = await _context.Song.FindAsync(id);
             if (song != null)
             {
