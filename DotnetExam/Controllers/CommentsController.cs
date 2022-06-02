@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetExam.Controllers
 {
-
+    [Authorize]
     public class CommentsController : Controller
     {
         private readonly DotnetExamContext _context;
@@ -22,7 +22,7 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Comments
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString)
         {
             var dotnetExamContext = _context.Comment.Include(c => c.Song).Include(c => c.user);

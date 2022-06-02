@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotnetExam.Data;
 using DotnetExam.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetExam.Controllers
 {
+    [Authorize]
     public class ArtistsController : Controller
     {
         private readonly DotnetExamContext _context;
@@ -21,6 +23,7 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Artists
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString)
         {
 

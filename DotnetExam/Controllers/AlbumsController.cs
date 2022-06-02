@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DotnetExam.Data;
 using DotnetExam.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetExam.Controllers
 {
+    [Authorize]
     public class AlbumsController : Controller
     {
         private readonly DotnetExamContext _context;
@@ -20,6 +22,7 @@ namespace DotnetExam.Controllers
         }
 
         // GET: Albums
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString)
         {
             var albums = from a in _context.Album select a;
