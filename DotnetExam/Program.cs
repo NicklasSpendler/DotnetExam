@@ -6,18 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("default") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
 
 builder.Services.AddDbContext<DotnetExamContext>(options =>
-    options.UseSqlServer(connectionString));;
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DotnetExamContext>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 var app = builder.Build();
-app.MapRazorPages();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

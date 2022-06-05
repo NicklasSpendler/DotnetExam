@@ -71,20 +71,15 @@ namespace DotnetExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentId,Text,TimeStamp,SongId")] Comment comment)
+        public async Task<IActionResult> Create([Bind("CommentId,Text,SongId")] Comment comment)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            if(user == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                comment.UserId = user.Id;
-            }
+            
 
             if (ModelState.IsValid)
             {
+                IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                comment.TimeStamp = DateTime.Now;
+                comment.UserId = user.Id;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

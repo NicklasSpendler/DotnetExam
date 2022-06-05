@@ -20,11 +20,11 @@ namespace DotnetExam.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            UsersSeed(builder);
             SeedSongs(builder);
             SeedArtists(builder);
             SeedComment(builder);
             SeedAlbum(builder);
+            UsersSeed(builder);
         }
 
         public void SeedSongs(ModelBuilder builder)
