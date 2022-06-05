@@ -10,7 +10,6 @@ namespace DotnetExam.Models
 
         [Required]
         [DisplayName("Song Name")]
-        
         public string Name { get; set; }
         
         [DisplayName("Artist")]

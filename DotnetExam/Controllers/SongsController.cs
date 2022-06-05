@@ -194,7 +194,6 @@ namespace DotnetExam.Controllers
             return RedirectToAction("Edit", new { @Id = id });
         }
 
-
         // GET: Songs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -223,11 +222,11 @@ namespace DotnetExam.Controllers
                 return Problem("Entity set 'DotnetExamContext.Song'  is null.");
             }
 
-            var comment = await _context.Comment.Where(c => c.SongId == id).ToListAsync();
+            var comments = await _context.Comment.Where(c => c.SongId == id).ToListAsync();
 
-            if(comment != null)
+            if(comments != null)
             {
-                _context.Comment.RemoveRange(comment);
+                _context.Comment.RemoveRange(comments);
 
                 await _context.SaveChangesAsync();
             }

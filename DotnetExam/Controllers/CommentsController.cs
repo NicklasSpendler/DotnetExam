@@ -15,10 +15,12 @@ namespace DotnetExam.Controllers
     public class CommentsController : Controller
     {
         private readonly DotnetExamContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CommentsController(DotnetExamContext context)
+        public CommentsController(DotnetExamContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Comments
@@ -61,7 +63,6 @@ namespace DotnetExam.Controllers
         public IActionResult Create()
         {
             ViewData["SongId"] = new SelectList(_context.Song, "Id", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -70,16 +71,24 @@ namespace DotnetExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentId,Text,TimeStamp,SongId,UserId")] Comment comment)
+        public async Task<IActionResult> Create([Bind("CommentId,Text,TimeStamp,SongId")] Comment comment)
         {
+            IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            if(user == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                comment.UserId = user.Id;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SongId"] = new SelectList(_context.Song, "Id", "Name", comment.SongId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", comment.UserId);
             return View(comment);
         }
 
