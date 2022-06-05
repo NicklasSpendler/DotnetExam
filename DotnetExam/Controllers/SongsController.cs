@@ -134,12 +134,11 @@ namespace DotnetExam.Controllers
             }
             
 
-
-
             if (song == null)
             {
                 return NotFound();
             }
+
             return View(new SongArtistDTO { Song = song});
         }
 
