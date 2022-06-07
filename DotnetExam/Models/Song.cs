@@ -20,6 +20,7 @@ namespace DotnetExam.Models
         
         [DisplayName("On Number of Albums")]
         public List<Album>? albums { get; set; }
+        [DisplayName("Comment(s)")]
         public List<Comment>? comments { get; set; }
         
     }
