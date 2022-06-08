@@ -26,6 +26,8 @@ namespace DotnetExam.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var albums = from a in _context.Album select a;
+           
+           
 
             if (!String.IsNullOrEmpty(searchString))
             {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetExam.Migrations
 {
     [DbContext(typeof(DotnetExamContext))]
-    [Migration("20220605120327_init")]
-    partial class init
+    [Migration("20220606113402_WTF")]
+    partial class WTF
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,6 @@ namespace DotnetExam.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -167,7 +166,7 @@ namespace DotnetExam.Migrations
                             CommentId = 1,
                             SongId = 1,
                             Text = "Klaustrfobisk astronaut... Lol!",
-                            TimeStamp = new DateTime(2022, 6, 5, 14, 3, 27, 560, DateTimeKind.Local).AddTicks(1385),
+                            TimeStamp = new DateTime(2022, 6, 6, 13, 34, 2, 511, DateTimeKind.Local).AddTicks(3459),
                             UserId = "1"
                         },
                         new
@@ -175,7 +174,7 @@ namespace DotnetExam.Migrations
                             CommentId = 2,
                             SongId = 1,
                             Text = "Give the man some SPACE!",
-                            TimeStamp = new DateTime(2022, 6, 5, 14, 3, 27, 560, DateTimeKind.Local).AddTicks(1415),
+                            TimeStamp = new DateTime(2022, 6, 6, 13, 34, 2, 511, DateTimeKind.Local).AddTicks(3485),
                             UserId = "2"
                         });
                 });
@@ -210,7 +209,6 @@ namespace DotnetExam.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("artistId")
@@ -442,13 +440,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "16960df1-89f0-4e3c-bb07-68458fe76966",
+                            ConcurrencyStamp = "fbd46e0a-dc77-462a-bdc2-25e1a6f08290",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGmX6kVWTYcTQwKCXHCbcVWaRCQkI79NfHBt43KhyznNEFOSyhr41wI3ScCqdbf7Vg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPsX/YIZDh5Xwbi6zcvkU30EJ/dW0I1HCb/TosTB0R97tBfr6KXupMTKUGzp3d73cg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e276130-9d74-47ea-bf22-49b1eff5c9aa",
+                            SecurityStamp = "9e9d4130-b2f7-4959-ae0f-9bbbee63574e",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -456,13 +454,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d571a07-70d4-4c61-8660-bfaed84d63db",
+                            ConcurrencyStamp = "0021494b-1aa2-4869-a420-7f44dc4b0c43",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEN8hhK/eiWfUqUk1pWrb81Cwcxnh7GptwGfKLsW/gnu/P6oweq2ZOLnHtZsjGpU6OA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL3Hq87/vuqT8m0zlOywk3JpKlCJaVniripgEyWKBXvWEkCrwhwMVJDNzePz1CcLQQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "da8486d0-eed8-4e86-936e-bc29f158fd57",
+                            SecurityStamp = "69ab7edd-5d2d-47d2-acc6-33b04f337f81",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });
@@ -593,9 +591,7 @@ namespace DotnetExam.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("DotnetExam.Models.Artist", "artist")
                         .WithMany()

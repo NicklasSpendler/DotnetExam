@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotnetExam.Migrations
 {
-    public partial class init : Migration
+    public partial class WTF : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace DotnetExam.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -212,7 +212,7 @@ namespace DotnetExam.Migrations
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     artistId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -226,8 +226,7 @@ namespace DotnetExam.Migrations
                         name: "FK_Event_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -316,8 +315,8 @@ namespace DotnetExam.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "16960df1-89f0-4e3c-bb07-68458fe76966", "test1@test.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEGmX6kVWTYcTQwKCXHCbcVWaRCQkI79NfHBt43KhyznNEFOSyhr41wI3ScCqdbf7Vg==", null, false, "3e276130-9d74-47ea-bf22-49b1eff5c9aa", false, "Jesper" },
-                    { "2", 0, "1d571a07-70d4-4c61-8660-bfaed84d63db", "test@gmail.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEN8hhK/eiWfUqUk1pWrb81Cwcxnh7GptwGfKLsW/gnu/P6oweq2ZOLnHtZsjGpU6OA==", null, false, "da8486d0-eed8-4e86-936e-bc29f158fd57", false, "Nicklas" }
+                    { "1", 0, "fbd46e0a-dc77-462a-bdc2-25e1a6f08290", "test1@test.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEPsX/YIZDh5Xwbi6zcvkU30EJ/dW0I1HCb/TosTB0R97tBfr6KXupMTKUGzp3d73cg==", null, false, "9e9d4130-b2f7-4959-ae0f-9bbbee63574e", false, "Jesper" },
+                    { "2", 0, "0021494b-1aa2-4869-a420-7f44dc4b0c43", "test@gmail.dk", true, false, null, null, null, "AQAAAAEAACcQAAAAEL3Hq87/vuqT8m0zlOywk3JpKlCJaVniripgEyWKBXvWEkCrwhwMVJDNzePz1CcLQQ==", null, false, "69ab7edd-5d2d-47d2-acc6-33b04f337f81", false, "Nicklas" }
                 });
 
             migrationBuilder.InsertData(
@@ -342,12 +341,12 @@ namespace DotnetExam.Migrations
             migrationBuilder.InsertData(
                 table: "Comment",
                 columns: new[] { "CommentId", "EventId", "SongId", "Text", "TimeStamp", "UserId" },
-                values: new object[] { 1, null, 1, "Klaustrfobisk astronaut... Lol!", new DateTime(2022, 6, 5, 14, 3, 27, 560, DateTimeKind.Local).AddTicks(1385), "1" });
+                values: new object[] { 1, null, 1, "Klaustrfobisk astronaut... Lol!", new DateTime(2022, 6, 6, 13, 34, 2, 511, DateTimeKind.Local).AddTicks(3459), "1" });
 
             migrationBuilder.InsertData(
                 table: "Comment",
                 columns: new[] { "CommentId", "EventId", "SongId", "Text", "TimeStamp", "UserId" },
-                values: new object[] { 2, null, 1, "Give the man some SPACE!", new DateTime(2022, 6, 5, 14, 3, 27, 560, DateTimeKind.Local).AddTicks(1415), "2" });
+                values: new object[] { 2, null, 1, "Give the man some SPACE!", new DateTime(2022, 6, 6, 13, 34, 2, 511, DateTimeKind.Local).AddTicks(3485), "2" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AlbumSong_albumsId",
