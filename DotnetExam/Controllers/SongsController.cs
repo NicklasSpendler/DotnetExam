@@ -29,7 +29,7 @@ namespace DotnetExam.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                dotnetExamContext = dotnetExamContext.Where(s => s.Name.Contains(searchString)).Include(a => a.artist).Include(b => b.albums);
+                dotnetExamContext = dotnetExamContext.Where(s => s.Name.Contains(searchString) || s.artist.Name.Contains(searchString)).Include(a => a.artist).Include(b => b.albums);
             }
 
             return View(await dotnetExamContext.ToListAsync());
