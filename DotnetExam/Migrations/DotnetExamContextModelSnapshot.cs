@@ -164,7 +164,7 @@ namespace DotnetExam.Migrations
                             CommentId = 1,
                             SongId = 1,
                             Text = "Klaustrfobisk astronaut... Lol!",
-                            TimeStamp = new DateTime(2022, 6, 7, 12, 16, 56, 294, DateTimeKind.Local).AddTicks(814),
+                            TimeStamp = new DateTime(2022, 6, 8, 20, 56, 55, 39, DateTimeKind.Local).AddTicks(2228),
                             UserId = "1"
                         },
                         new
@@ -172,7 +172,7 @@ namespace DotnetExam.Migrations
                             CommentId = 2,
                             SongId = 1,
                             Text = "Give the man some SPACE!",
-                            TimeStamp = new DateTime(2022, 6, 7, 12, 16, 56, 294, DateTimeKind.Local).AddTicks(841),
+                            TimeStamp = new DateTime(2022, 6, 8, 20, 56, 55, 39, DateTimeKind.Local).AddTicks(2256),
                             UserId = "2"
                         });
                 });
@@ -438,13 +438,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ef3d33b3-b124-4608-85a9-3c7a7f6e57ac",
+                            ConcurrencyStamp = "0515ac7c-7fed-4b51-a2f2-863c9ef27477",
                             Email = "test1@test.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAED9WJqnpiyZ1A690H1WnkX493YbJmMnCj1UsAn/7v/CcCddVQmjDUgXeZcjBvigm0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENqcQ2ny1hTLy2ohcfs7Ziqyyjy34zYzBjUKHyuGEbzQJJPv+9SPvKGISUyGUOBzBg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1400f75c-2ea2-448e-b227-af4bc578e39a",
+                            SecurityStamp = "efd397e6-7614-4e86-9738-7e2813bea46c",
                             TwoFactorEnabled = false,
                             UserName = "Jesper"
                         },
@@ -452,13 +452,13 @@ namespace DotnetExam.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3fd678b2-b39c-45a2-a156-cf1640f32375",
+                            ConcurrencyStamp = "2da2943d-1603-499e-bc99-2d13e4824bb0",
                             Email = "test@gmail.dk",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEALEqr8i5QLvLn18/N51PVkcL8t04UbYkP7rJ0Ykc3/fsrWLycmdUwe9mgwRejFC8w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENCG0pmbLSzVh0tg3jJljmrZGL8nvHwJms1fjl/m2Ie2RNMZpOtq1L/dziK+HiVfOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2831156-5def-45e0-8f50-5f76a4fdd93d",
+                            SecurityStamp = "1d041f81-1538-4ef4-b60d-11614655fb03",
                             TwoFactorEnabled = false,
                             UserName = "Nicklas"
                         });

@@ -19,7 +19,7 @@ namespace DotnetExam.Models
         public int? ArtistId { get; set; }
 
         
-        [DisplayName("On Number of Albums")]
+        [DisplayName("On Number(s) of Albums")]
         public List<Album>? albums { get; set; }
         [DisplayName("Comment(s)")]
         public List<Comment>? comments { get; set; }
