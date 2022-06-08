@@ -32,7 +32,7 @@ namespace DotnetExam.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                dotnetExamContext = dotnetExamContext.Where(s => s.Text.Contains(searchString)).Include(c => c.Song).Include(c => c.user);
+                dotnetExamContext = dotnetExamContext.Where(s => s.Text.Contains(searchString) || s.Song.Name.Contains(searchString) || s.user.UserName.Contains(searchString)).Include(c => c.Song).Include(c => c.user);
             }
 
             return View(await dotnetExamContext.ToListAsync());
