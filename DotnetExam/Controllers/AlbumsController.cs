@@ -207,6 +207,3 @@ namespace DotnetExam.Controllers
         }
     }
 }
-
-
-

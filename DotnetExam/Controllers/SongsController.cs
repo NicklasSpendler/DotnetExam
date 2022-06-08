@@ -77,9 +77,7 @@ namespace DotnetExam.Controllers
 
                 ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
 
-                ViewData["Albums"] = new SelectList(_context.Album, "Id", "Name");
- 
-                //ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
+                ViewData["albums"] = new SelectList(_context.Album, "Id", "Name");
         
 
             return View();
@@ -90,21 +88,33 @@ namespace DotnetExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ArtistId,albums")] Song song)
+        //[Bind("Id,Name,ArtistId,albums")]
+        public async Task<IActionResult> Create(SongAlbumListDTO songDTO)
         {
 
-            //if (song.artist == null)
-            //{
-            //    ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name");
-            //}
-            //else
-            //{
-            //    ViewData["Artists"] = new SelectList(_context.Artist, "Id", "Name", song.artist.Id);
-            //}
+            var currentsong = songDTO.Song;
+            var selectedAlbumIds = songDTO.AlbumIds;
+
+            if (currentsong == null)
+            {
+                return BadRequest();
+            }
 
             if (ModelState.IsValid)
             {
-                _context.Add(song);
+                _context.Add(currentsong);
+                if (selectedAlbumIds != null)
+                {
+                    foreach (var singlealbum in selectedAlbumIds)
+                    {
+                        var currentAlbum = await _context.Album.Where(a => a.Id == singlealbum).Include(a => a.Songs).FirstOrDefaultAsync();
+                        if(currentAlbum != null) 
+                        {
+                            currentAlbum.Songs.Add(currentsong);
+                        }
+                        
+                    }
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

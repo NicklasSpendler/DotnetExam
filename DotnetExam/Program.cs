@@ -3,6 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 using DotnetExam.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var connectionString = builder.Configuration.GetConnectionString("default") ?? throw new InvalidOperationException("Connection string 'DotnetExamContextConnection' not found.");
 
 builder.Services.AddDbContext<DotnetExamContext>(options =>
@@ -35,6 +36,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

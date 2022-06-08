@@ -12,8 +12,7 @@ namespace DotnetExam.Data
 {
     public class DotnetExamContext : IdentityDbContext
     {
-        public DotnetExamContext (DbContextOptions<DotnetExamContext> options)
-            : base(options)
+        public DotnetExamContext (DbContextOptions<DotnetExamContext> options) : base(options)
         {
         }
 
